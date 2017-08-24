@@ -35,32 +35,20 @@ app.get('/bookride',(req,res)=>{
         let pinkcabs=_.where(cars,{pink:true,availabel:true});
         let bookedCab = distance.bookride(pinkcabs,userLat,userLong);
         res.send(bookedCab);
-        /*if(pinkcabs.length !== 0){
-            let bookedCabs=distance.bookride(pinkcabs,userLat,userLong);
-            bookedCabs.availabel=false;
-            res.send(bookedCabs);
-        }else{
-            res.send("No pink cabs availabel at this time Please try again later");
-        }*/
     }else {
         let availabelCabs = _.where(cars, {availabel: true,pink:false});
-        /*if (availabelCabs.length !== 0) {
-            let bookedCar= distance.bookride(availabelCabs,userLat,userLong);
-            bookedCar.availabel=false;
-            console.log("car booked",bookedCar);
-            res.send(bookedCar);
-        } else {
-            res.send("No cabs availabel at this time Please try again later");
-        }*/
-        //console.log("availabel cars",availabelCabs);
+        let bookedCab = distance.bookride(availabelCabs,userLat,userLong);
+        res.send(bookedCab);
     }
 });
 
 app.get('/endride',(req,res)=>{
     let userLat = req.query.lat;
     let userLong=req.query.long;
-
-
+    let cab =parseInt(req.query.id);
+    let bookedCab = _.findWhere(cars,{id:cab});
+    let endride = distance.endride(bookedCab,userLat,userLong);
+    res.send(endride);
 });
 
 app.listen(3000,()=>{

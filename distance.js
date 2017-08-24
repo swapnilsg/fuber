@@ -21,13 +21,21 @@ module.exports ={
                     nearestCab=index;
                 }
             });
+            nearestCab.availabel=false;
+            nearestCab.lat=userLat;
+            nearestCab.lan=userLong;
             return nearestCab;
         }else{
             return "No cabs found, please try again later";
         }
     },
-    endride:()=>{
-
+    endride:(cab,lat,long)=>{
+        let totalDistance = calculateDistance(cab.lat,cab.lan,lat,long);
+        cab.lat=lat;
+        cab.lan=long;
+        cab.availabel=true;
+        console.log(totalDistance);
+        return "your total distance is:"+totalDistance;
     }
 }
 

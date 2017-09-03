@@ -1,56 +1,23 @@
 const express =require('express');
 const _ = require('underscore');
-const distance = require('./distance');
+const distance = require('./models');
 const app = express();
 
-
-
-let cars=[{
-    id:101,
-    lan:12.926334,
-    lat:77.488129,
-    availabel:true,
-    pink:false
-},{
-    id:102,
-    lan:12.928342,
-    lat:77.486198,
-    availabel:true,
-    pink:false
-},{
-    id:103,
-    lan:12.922606,
-    lat:77.488886,
-    availabel:true,
-    pink:true
-}];
-
+let model=new distance();
 
 app.get('/bookride',(req,res)=>{
     let userLat = req.query.lat;
     let userLong=req.query.long;
     let pinkCab=req.query.pink;
-    //check if the user prefers the pink cab
-    if(pinkCab){
-        //filter pink available cabs
-        let pinkcabs=_.where(cars,{pink:true,availabel:true});
-        let bookedCab = distance.bookride(pinkcabs,userLat,userLong);
-        res.send(bookedCab);
-    }else {
-        //filter available cabs
-        let availabelCabs = _.where(cars, {availabel: true,pink:false});
-        let bookedCab = distance.bookride(availabelCabs,userLat,userLong);
-        res.send(bookedCab);
-    }
+    let response = model.bookride(pinkCab,userLat,userLong);
+    res.send(response);
 });
 
 app.get('/endride',(req,res)=>{
     let userLat = req.query.lat;
     let userLong=req.query.long;
-    let cab =parseInt(req.query.id);
-    //select boked cab based on ID
-    let bookedCab = _.findWhere(cars,{id:cab});
-    let endride = distance.endride(bookedCab,userLat,userLong);
+    let cabid =parseInt(req.query.id);
+    let endride = model.endride(cabid,userLat,userLong);
     res.send(endride);
 });
 

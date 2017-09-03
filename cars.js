@@ -1,0 +1,64 @@
+let cars=[{
+    id:101,
+    lat:10,
+    lan:10,
+    availabel:true,
+    pink:false
+},{
+    id:102,
+    lat:10,
+    lan:20,
+    availabel:true,
+    pink:false
+},{
+    id:103,
+    lat:15,
+    lan:20,
+    availabel:true,
+    pink:true
+},{
+    id:104,
+    lat:15,
+    lan:30,
+    availabel:true,
+    pink:false
+},{
+    id:105,
+    lat:20,
+    lan:20,
+    availabel:true,
+    pink:false
+},{
+    id:106,
+    lat:20,
+    lan:40,
+    availabel:true,
+    pink:true
+},{
+    id:107,
+    lat:50,
+    lan:50,
+    availabel:true,
+    pink:false
+},{
+    id:108,
+    lat:50,
+    lan:20,
+    availabel:true,
+    pink:false
+},{
+    id:109,
+    lat:30,
+    lan:60,
+    availabel:true,
+    pink:true
+},{
+    id:110,
+    lat:70,
+    lan:70,
+    availabel:true,
+    pink:false
+}];
+
+
+module.exports=cars;
